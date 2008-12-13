@@ -1,19 +1,19 @@
 h1. Appscript Launcher
 
-This application bundle provides an application that allows the launching, via URL protocol, of arbitrary scripts within a specified directory within the ~/Library/Application\ Support/Appscripts/ directory.  It is intended for those using rb-appscript tool, but it will launch any ruby script.
+This application bundle provides an application that allows the launching, via URL protocol, of arbitrary scripts within a specified directory within the <code>~/Library/Application\ Support/Appscripts/</code> directory.  It is intended for those using rb-appscript tool, but it will launch any ruby script.
 
 h2. Installation
 
 # Download and install wherever appropriate.  I'd reccommend putting it somewhere like ~/Applications/.  
-# Create an "Appscript" directory in ~/Library/Application\ Support/
+# Create an "Appscript" directory in <code>~/Library/Application\ Support/</code>
 
 ... or modify the application's AppleScript Source in Contents/Resources/Scripts to launch whatever you want.  Protocol can be changed in Contents/Info.plist. 
 
 h2. Usage
 
-Place the script you want to use in  ~/Library/Application\ Support/Appscript/, as such:
+Place the script you want to use in  <code>~/Library/Application\ Support/Appscript/</code>, as such:
 
-bq. ~/Library/Application\ Support/Appscripts/make_coffee.rb
+bq. <code>~/Library/Application\ Support/Appscripts/make_coffee.rb</code>
 
 Build a URL to launch the script, passing whatever arguments into the URL as you need:
 
