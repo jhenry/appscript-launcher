@@ -1,6 +1,6 @@
 h1. Appscript Launcher
 
-This application bundle provides an application that allows the launching, via URL protocol, of arbitrary scripts within a specified directory within the <code>~/Library/Application\ Support/Appscripts/</code> directory.  It is intended for those using rb-appscript tool, but it will launch any ruby script.
+This application bundle provides an application that allows the launching, via URL protocol, of arbitrary scripts within the <code>~/Library/Application\ Support/Appscripts/</code> directory.  It is intended for those using rb-appscript tool, but it will launch any ruby script.
 
 h2. Installation
 
