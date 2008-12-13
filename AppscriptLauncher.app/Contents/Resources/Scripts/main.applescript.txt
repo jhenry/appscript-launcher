@@ -1,4 +1,5 @@
--- Appcript Launcher
+
+-- Appscript Launcher
 -- Author: Justin Henry http://greengaloshes.cc
 -- Purpose: Provide an application that allows the launching, 
 --          via URL protocol, of arbitrary scripts within a 
