@@ -1,1 +1,78 @@
--- Appcript Launcher-- Author: Justin Henry http://greengaloshes.cc-- Purpose: Provide an application that allows the launching, --          via URL protocol, of arbitrary scripts within a --          specified directory.-- Use this block to test the function without actually having -- to launch it from a URL .on run     -- Sample url format for testing    set the_text to "appscript://com.greengaloshes.AppleScript.AppscriptLauncher?run=flextime.rb&name=bob&duration=5mins"       	set the argument_string to get_argument_string(the_text)    set the_script to get_script_name(the_text)            set scripts_path to POSIX path of (path to application support from user domain)	set the_folder to "Appscript/"	do shell script "ruby " & quoted form of scripts_path & the_folder & the_script & space & quoted form of the argument_stringend run-- Main block of the application.  -- Launched when passed a URL, as specified in Info.plist.on open location this_URL    -- Grab the argument string and the script name,    -- as passed via the commands in the argument string.	set the argument_string to get_argument_string(this_URL)    set the_script to get_script_name(this_URL)        -- Get the path to the application support folder     -- in the user's home directory.  We'll be looking     -- in the "Appscript" folder within that directory.    -- Final path would be something like ~/Library/Application\ Support/Appscript/	set scripts_path to POSIX path of (path to application support from user domain)	set the_folder to "Appscript/"		-- Run the command, passing arguments as retrieved above.	do shell script "ruby " & quoted form of scripts_path & the_folder & the_script & space & quoted form of the argument_stringend open location-- Supporting Methods-- Most functionality in the below methods was cribbed -- from Apple's Launch Scripts from Webpage Links article: -- http://www.apple.com/applescript/linktrigger/on get_script_name(the_url)    set these_arguments to get_arguments(the_url)    -- There's got to be an easier way to do this, right?    repeat with i from 1 to the count of these_arguments	         set this_pair to item i of these_arguments	         set AppleScript's text item delimiters to "="	         copy every text item of this_pair to {this_key, this_value}	         set AppleScript's text item delimiters to ""	         if this_key is "run" then	             set the_script to this_value             end if     end repeat    return the_scriptend get_script_nameon get_arguments(the_url)    set the argument_string to get_argument_string(the_url)    set AppleScript's text item delimiters to "&"	set these_arguments to every text item of the argument_string	set AppleScript's text item delimiters to ""    return these_argumentsend get_argumentson get_argument_string(the_url)    set x to the offset of "?" in the_url    set the argument_string to text from (x + 1) to -1 of the_url    return argument_stringend get_argument_string
+-- Appcript Launcher
+-- Author: Justin Henry http://greengaloshes.cc
+-- Purpose: Provide an application that allows the launching, 
+--          via URL protocol, of arbitrary scripts within a 
+--          specified directory.
+
+
+
+-- Use this block to test the function without actually having 
+-- to launch it from a URL .
+on run 
+    -- Sample url format for testing
+    set the_text to "appscript://com.greengaloshes.AppleScript.AppscriptLauncher?run=flextime.rb&name=bob&duration=5mins"
+    
+   	set the argument_string to get_argument_string(the_text)
+    set the_script to get_script_name(the_text)
+        
+    set scripts_path to POSIX path of (path to application support from user domain)
+	set the_folder to "Appscript/"
+
+	do shell script "ruby " & quoted form of scripts_path & the_folder & the_script & space & quoted form of the argument_string
+end run
+
+
+-- Main block of the application.  
+-- Launched when passed a URL, as specified in Info.plist.
+on open location this_URL
+
+    -- Grab the argument string and the script name,
+    -- as passed via the commands in the argument string.
+	set the argument_string to get_argument_string(this_URL)
+    set the_script to get_script_name(this_URL)
+    
+    -- Get the path to the application support folder 
+    -- in the user's home directory.  We'll be looking 
+    -- in the "Appscript" folder within that directory.
+    -- Final path would be something like ~/Library/Application\ Support/Appscript/
+	set scripts_path to POSIX path of (path to application support from user domain)
+	set the_folder to "Appscript/"
+	
+	-- Run the command, passing arguments as retrieved above.
+	do shell script "ruby " & quoted form of scripts_path & the_folder & the_script & space & quoted form of the argument_string
+
+end open location
+
+-- Supporting Methods
+-- Most functionality in the below methods was cribbed 
+-- from Apple's Launch Scripts from Webpage Links article: 
+-- http://www.apple.com/applescript/linktrigger/
+
+on get_script_name(the_url)
+    set these_arguments to get_arguments(the_url)
+    -- There's got to be an easier way to do this, right?
+    repeat with i from 1 to the count of these_arguments
+	         set this_pair to item i of these_arguments
+	         set AppleScript's text item delimiters to "="
+	         copy every text item of this_pair to {this_key, this_value}
+	         set AppleScript's text item delimiters to ""
+	         if this_key is "run" then
+	             set the_script to this_value
+             end if 
+    end repeat
+    return the_script
+end get_script_name
+
+on get_arguments(the_url)
+    set the argument_string to get_argument_string(the_url)
+    set AppleScript's text item delimiters to "&"
+	set these_arguments to every text item of the argument_string
+	set AppleScript's text item delimiters to ""
+    return these_arguments
+end get_arguments
+
+on get_argument_string(the_url)
+    set x to the offset of "?" in the_url
+    set the argument_string to text from (x + 1) to -1 of the_url
+    return argument_string
+end get_argument_string
