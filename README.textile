@@ -4,8 +4,8 @@ This application bundle provides an application that allows the launching, via U
 
 h2. Installation
 
-1. Download and install wherever appropriate.  I'd reccommend putting it somewhere like ~/Applications/.  
-2. Create an "Appscript" directory in ~/Library/Application\ Support/
+# Download and install wherever appropriate.  I'd reccommend putting it somewhere like ~/Applications/.  
+# Create an "Appscript" directory in ~/Library/Application\ Support/
 
 ... or modify the application's AppleScript Source in Contents/Resources/Scripts to launch whatever you want.  Protocol can be changed in Contents/Info.plist. 
 
@@ -13,11 +13,11 @@ h2. Usage
 
 Place the script you want to use in  ~/Library/Application\ Support/Appscript/, as such:
 
-~/Library/Application\ Support/Appscripts/make_coffee.rb
+bq. ~/Library/Application\ Support/Appscripts/make_coffee.rb
 
 Build a URL to launch the script, passing whatever arguments into the URL as you need:
 
-appscript://com.greengaloshes.AppleScript.AppscriptLauncher?run=make_coffee.rb&kind=sumatran&roast=dark
+bq. appscript://com.greengaloshes.AppleScript.AppscriptLauncher?run=make_coffee.rb&kind=sumatran&roast=dark
 
 h3. Further reading
 
